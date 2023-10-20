@@ -9,8 +9,8 @@ type GameSettings struct {
 	// Display
 	ScreenWidth     int  `json:"screenWidth"`     // 1920
 	ScreenHeight    int  `json:"screenHeight"`    // 1080
-	RenderWidth     int  `json:"renderWidth"`     // 640
-	RenderHeight    int  `json:"renderHeight"`    // 360
+	RenderWidth     int  `json:"renderWidth"`     // 128
+	RenderHeight    int  `json:"renderHeight"`    // 186
 	TargetFps       int  `json:"targetFps"`       // 144
 	Fullscreen      bool `json:"fullscreen"`      // false
 	EnableCrtEffect bool `json:"enableCrtEffect"` // true
