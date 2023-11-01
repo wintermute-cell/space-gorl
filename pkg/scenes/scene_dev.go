@@ -2,6 +2,7 @@ package scenes
 
 import (
 	"cowboy-gorl/pkg/ai/navigation"
+	"cowboy-gorl/pkg/entities"
 	"cowboy-gorl/pkg/entities/gem"
 	"cowboy-gorl/pkg/entities/proto"
 	"cowboy-gorl/pkg/gui"
@@ -29,11 +30,50 @@ type DevScene struct {
 
 func (scn *DevScene) Init() {
 	scn.g = gui.NewGui()
-    map_size := rl.NewVector2(900, 800)
-    render.SetCameraClampBounds(rl.NewRectangle(0, 0, map_size.X, map_size.Y))
 	scn.scn_root_ent = &proto.BaseEntity{Name: "DevSceneRoot"}
 	gem.AddEntity(gem.Root(), scn.scn_root_ent)
 	//lighting.Enable()
+    render.SetCameraTarget(
+        rl.Vector2Scale(render.Rs.RenderResolution, 0.5),
+        )
+
+    origin := rl.NewVector2(0, 16)
+    num_frames := int32(32)
+
+
+    gameStateHandler := entities.NewGameStateHandlerEntity()
+    cursor := entities.NewCursorEntity2D(gameStateHandler)
+
+    bg := entities.NewBackgroundEntity2D(origin, 0, rl.Vector2One())
+    gem.AddEntity(scn.scn_root_ent, bg)
+    snowL := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowL.png"), num_frames)
+    gem.AddEntity(scn.scn_root_ent, snowL)
+    bgFog := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/bg_fog.png"), false, 155, true)
+    gem.AddEntity(scn.scn_root_ent, bgFog)
+
+    girl := entities.NewGirlEntity2D(origin, num_frames)
+    gem.AddEntity(scn.scn_root_ent, girl)
+
+    lightBelow := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/light_below.png"), true, 150, false)
+    gem.AddEntity(scn.scn_root_ent, lightBelow)
+
+    snowpile := entities.NewSnowpileEntity2D(origin, gameStateHandler)
+    gem.AddEntity(scn.scn_root_ent, snowpile)
+
+    frostVignette := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/frost_vignette.png"), false, 130, false)
+    gem.AddEntity(scn.scn_root_ent, frostVignette)
+    vignette := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/vignette.png"), false, 100, false)
+    gem.AddEntity(scn.scn_root_ent, vignette)
+
+    snowM := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowM.png"), num_frames)
+    gem.AddEntity(scn.scn_root_ent, snowM)
+    snowS := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowS.png"), num_frames)
+    gem.AddEntity(scn.scn_root_ent, snowS)
+
+    icebar := entities.NewIcebarEntity2D(rl.Vector2Zero(), gameStateHandler)
+    gem.AddEntity(scn.scn_root_ent, icebar)
+
+    gem.AddEntity(scn.scn_root_ent, cursor)
 
 	logging.Info("DevScene initialized.")
 }
@@ -41,7 +81,6 @@ func (scn *DevScene) Init() {
 func (scn *DevScene) Deinit() {
     gem.RemoveEntity(scn.scn_root_ent)
 	//lighting.Disable()
-    render.SetCameraClampBounds(rl.Rectangle{})
 	logging.Info("DevScene de-initialized.")
 }
 

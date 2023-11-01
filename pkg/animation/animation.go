@@ -117,7 +117,7 @@ func (a *Animation[T]) GetLength() float32 {
 
 // Update the animation, should be called every frame
 func (a *Animation[T]) Update() {
-        if !a.isPlaying {
+    if !a.isPlaying {
         return
     }
 

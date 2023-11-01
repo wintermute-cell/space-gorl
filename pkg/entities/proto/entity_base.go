@@ -53,6 +53,11 @@ func (ent *BaseEntity) Draw() {
 	// ...
 }
 
+func (ent *BaseEntity) DrawGUI() {
+	// GUI Draw logic for the entity
+	// ...
+}
+
 // AddChild adds a child to this entity.
 func (ent *BaseEntity) AddChild(child Entity) {
 	ent.children = append(ent.children, child)

@@ -12,7 +12,7 @@ var c cursor
 
 func Init() {
 	c = cursor{
-		sprite: rl.LoadTexture("sprites/player/crosshair.png"),
+		sprite: rl.LoadTexture("sprites/cursor.png"),
 	}
 }
 

@@ -13,6 +13,7 @@ type Entity interface {
 	Update()
     FixedUpdate()
 	Draw()
+    DrawGUI()
 	AddChild(child Entity)
 	RemoveChild(child Entity)
 	GetChildren() []Entity

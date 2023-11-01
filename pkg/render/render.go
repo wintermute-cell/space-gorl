@@ -27,6 +27,7 @@ import (
 	"cowboy-gorl/pkg/util"
 	"math"
 
+	"github.com/aquilax/go-perlin"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -35,6 +36,8 @@ type RenderStage struct {
     Target *rl.RenderTexture2D
     WSCamera *rl.Camera2D
     SSCamera *rl.Camera2D
+    trueWSCamera rl.Camera2D
+    trueSSCamera rl.Camera2D
     Shader rl.Shader
     ClearColor rl.Color
     ClearBefore bool
@@ -42,10 +45,10 @@ type RenderStage struct {
 
 func (rs *RenderStage) Begin() {
     Rs.CurrentStage = rs
-    SetCameraTarget(Rs.current_ws_cam_pos)
+    setCamTargetInternal(Rs.current_ws_cam_pos)
     rl.BeginTextureMode(*rs.Target)
     if rs.WSCamera != nil {
-        rl.BeginMode2D(*rs.WSCamera)
+        rl.BeginMode2D(rs.trueWSCamera)
     }
 }
 
@@ -54,6 +57,33 @@ func (rs *RenderStage) Prepare() {
         rl.BeginTextureMode(*rs.Target)
         rl.ClearBackground(rs.ClearColor)
         rl.EndTextureMode()
+
+        if rs.WSCamera != nil {
+            rs.trueWSCamera = rl.NewCamera2D(rs.WSCamera.Offset, rs.WSCamera.Target, rs.WSCamera.Rotation, rs.WSCamera.Zoom)
+            //offsetX := Rs.shakePerlin.Noise1D(rl.GetTime()*8)       * (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma)) * 16
+            //offsetY := Rs.shakePerlin.Noise1D((rl.GetTime()+666)*8) * (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma)) * 16
+            //shakeVector := rl.NewVector2(float32(offsetX), float32(offsetY))
+            //rs.trueWSCamera.Offset = rl.Vector2Add(
+            //    rs.trueWSCamera.Offset,
+            //    shakeVector)
+        }
+        if rs.SSCamera != nil {
+            traumaSq := (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma))
+            rotOffs := Rs.shakePerlin.Noise1D(
+                rl.GetTime()+333*8) * (traumaSq) * float64(Rs.RenderResolution.X)
+
+            offsetX := Rs.shakePerlin.Noise1D(
+                rl.GetTime()      *8) * traumaSq * float64(Rs.RenderResolution.X) * 2
+            offsetY := Rs.shakePerlin.Noise1D(
+                (rl.GetTime()+666)*8) * traumaSq * float64(Rs.RenderResolution.Y) * 2
+            posOffs := rl.Vector2Add(
+                rs.SSCamera.Offset,
+                rl.NewVector2(float32(offsetX), float32(offsetY)))
+
+            m := rl.NewVector2(float32(rl.GetScreenWidth()) * 0.5, float32(rl.GetScreenHeight()) * 0.5)
+            posOffs = rl.Vector2Add(posOffs, m)
+            rs.trueSSCamera = rl.NewCamera2D(posOffs, m, float32(rotOffs), rs.SSCamera.Zoom)
+        }
     }
 }
 
@@ -61,7 +91,7 @@ func (rs *RenderStage) Continue() {
     Rs.CurrentStage = rs
     rl.BeginTextureMode(*rs.Target)
     if rs.WSCamera != nil {
-        rl.BeginMode2D(*rs.WSCamera)
+        rl.BeginMode2D(rs.trueWSCamera)
     }
 }
 
@@ -151,6 +181,9 @@ type RenderState struct {
 	tex1locs map[rl.Shader]int32
 
 	lastScreenHeight int32
+
+    cameraTrauma float32
+    shakePerlin *perlin.Perlin
 }
 
 var Rs RenderState
@@ -163,6 +196,7 @@ func Init(render_width int, render_height int) {
         ws_cameras: make(map[*rl.RenderTexture2D]*rl.Camera2D),
         ss_cameras: make(map[*rl.RenderTexture2D]*rl.Camera2D),
         targets: make(map[string]*rl.RenderTexture2D),
+        shakePerlin: perlin.NewPerlin(1, 1, 1, 0),
 	}
 
 	// this is used to detect if the screen is resized
@@ -255,6 +289,11 @@ func Init(render_width int, render_height int) {
 	Rs.tex1locs[Rs.crt_dat.Accumulateshader] = rl.GetShaderLocation(Rs.crt_dat.Accumulateshader, "texture1")
 	Rs.tex1locs[Rs.crt_dat.Blendshader] = rl.GetShaderLocation(Rs.crt_dat.Blendshader, "texture1")
 
+    // begin the primary stage here already, so packages can reference the
+    // CurrentStage in their Initialization (for example to set the camera
+    // target.)
+    Rs.PrimaryStage.Begin()
+
 	logging.Info("Custom Rendering Environment initialized.")
 }
 
@@ -270,7 +309,7 @@ func Deinit() {
 }
 
 // Camera functions
-func SetCameraTarget(target rl.Vector2) {
+func setCamTargetInternal(target rl.Vector2) {
 
 	Rs.CurrentStage.SSCamera.Target = target
 
@@ -327,6 +366,24 @@ func SetCameraTargetSmooth(target rl.Vector2) {
         )
     }
     Rs.current_ws_cam_target = target
+}
+
+func SetCameraTarget(target rl.Vector2) {
+    currentRenderResolution := rl.NewVector2(
+        float32(Rs.CurrentStage.Target.Texture.Width),
+        float32(Rs.CurrentStage.Target.Texture.Height))
+    
+    if Rs.cam_clamp_bounds != (rl.Rectangle{}) {
+        target = util.Vector2Clamp(
+            target,
+            // stay away half a screen from the upper left bounds
+            rl.Vector2Add(rl.Vector2Scale(currentRenderResolution, 0.5), rl.NewVector2(Rs.cam_clamp_bounds.X, Rs.cam_clamp_bounds.Y)),
+            // stay away half a screen from the lower right bounds
+            rl.Vector2Subtract(rl.NewVector2(Rs.cam_clamp_bounds.Width, Rs.cam_clamp_bounds.Height), rl.Vector2Scale(currentRenderResolution, 0.5)),
+        )
+    }
+    Rs.current_ws_cam_target = target
+    Rs.current_ws_cam_pos = target
 }
 
 func update_ws_cam_lerp() {
@@ -395,7 +452,7 @@ func EndCustomRender() {
 
 	rl.BeginTextureMode(Rs.CeilTex)
 
-	rl.BeginMode2D(*Rs.PrimaryStage.SSCamera)
+	rl.BeginMode2D(Rs.PrimaryStage.trueSSCamera)
 	rl.DrawTexturePro(Rs.PrimaryStage.Target.Texture,
 		rl.Rectangle{
 			X:      0.0,
@@ -412,7 +469,7 @@ func EndCustomRender() {
 		rl.Vector2{X: 0, Y: 0}, 0, rl.White)
 	rl.EndMode2D()
 
-    rl.BeginMode2D(*Rs.FxStage.SSCamera)
+    rl.BeginMode2D(Rs.FxStage.trueSSCamera)
 	rl.DrawTexturePro(Rs.FxStage.Target.Texture,
 		rl.Rectangle{
 			X:      0.0,

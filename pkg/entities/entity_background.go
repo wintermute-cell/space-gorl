@@ -17,7 +17,7 @@ func NewBackgroundEntity2D(position rl.Vector2, rotation float32, scale rl.Vecto
 	new_ent := &BackgroundEntity2D{
 		BaseEntity2D: proto.BaseEntity2D{Transform: proto.Transform2D{Position: position, Rotation: rotation, Scale: scale}},
 
-        sprite: rl.LoadTexture(":q"),
+        sprite: rl.LoadTexture("sprites/background/background.png"),
 	}
 	return new_ent
 }
@@ -47,6 +47,12 @@ func (ent *BackgroundEntity2D) Update() {
 }
 
 func (ent *BackgroundEntity2D) Draw() {
-	// Draw logic for the entity
-	// ...
+    rl.DrawTexturePro(
+        ent.sprite,
+        rl.NewRectangle(0, 0, float32(ent.sprite.Width), float32(ent.sprite.Height)),
+        rl.NewRectangle(ent.Transform.Position.X, ent.Transform.Position.Y, float32(ent.sprite.Width), float32(ent.sprite.Height)),
+        rl.NewVector2(0, 0),
+        ent.Transform.Rotation,
+        rl.White,
+        )
 }

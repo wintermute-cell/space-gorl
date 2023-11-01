@@ -114,8 +114,20 @@ void main(void){
 
         // TODO: add adjustment parameters to all these effects
         /* Level adjustment (curves) */
-        col *= vec3(0.75,0.79,0.75);
-        col = clamp(col*1.3 + 0.75*col*col + 1.25*col*col*col*col*col,vec3(0.0),vec3(10.0));
+        // Initial color adjustment
+        col *= vec3(0.74, 0.76, 0.75);
+
+        // Break down the curve operation
+        vec3 colSquared = col * col;          // col^2
+        vec3 colFifthPower = colSquared * colSquared * col;  // col^5
+
+        // Calculate the combined curves operation
+        vec3 curveResult = col * 0.7 // overall brightness
+                         + 0.55 * colSquared  // midtones
+                         + 1.25 * colFifthPower; // shadows
+
+        // Clamp the result
+        col = clamp(curveResult, vec3(0.0), vec3(10.0));
 
         /* Vignette */
         float vig = (0.1 + 1.0*16.0*curved_uv.x*curved_uv.y*(1.0-curved_uv.x)*(1.0-curved_uv.y));

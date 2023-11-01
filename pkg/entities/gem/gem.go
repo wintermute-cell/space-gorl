@@ -73,7 +73,11 @@ func UpdateEntities() {
 }
 
 func DrawEntities() {
-	draw_entities_flattened(Gem.root)
+	draw_entities_flattened(Gem.root, false)
+}
+
+func DrawEntitiesGUI() {
+	draw_entities_flattened(Gem.root, true)
 }
 
 func updateEntity(entity proto.Entity, with_fixed_update bool) {
@@ -112,7 +116,7 @@ func flatten_entities(entity proto.Entity, depth int) []flattened_entity {
 	return flattened_list
 }
 
-func draw_entities_flattened(root proto.Entity) {
+func draw_entities_flattened(root proto.Entity, draw_gui bool) {
 	// Flatten the entities
 	flattened_entities := flatten_entities(root, 0)
 
@@ -128,7 +132,11 @@ func draw_entities_flattened(root proto.Entity) {
 
 	// Draw in sorted order
 	for _, fe := range flattened_entities {
-		fe.Entity.Draw()
+        if draw_gui {
+            fe.Entity.DrawGUI()
+        } else {
+            fe.Entity.Draw()
+        }
 	}
 }
 

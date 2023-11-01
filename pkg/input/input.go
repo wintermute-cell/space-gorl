@@ -22,7 +22,9 @@ const (
 	ActionMoveDown
 	ActionMoveLeft
 	ActionMoveRight
-	ActionShoot
+    ActionClickDown
+    ActionClickHeld
+    ActionClickUp
 	ActionReload
 	ActionDash
 	// Add other actions as needed
@@ -59,8 +61,14 @@ var ActionMap = map[Action][]Trigger{
 	ActionMoveRight: {
 		{Type: TriggerTypeKey, Event: EventTypeDown, Key: rl.KeyD},
 	},
-	ActionShoot: {
+	ActionClickDown: {
 		{Type: TriggerTypeMouse, Event: EventTypePressed, MouseButton: rl.MouseLeftButton},
+	},
+	ActionClickHeld: {
+		{Type: TriggerTypeMouse, Event: EventTypeDown, MouseButton: rl.MouseLeftButton},
+	},
+	ActionClickUp: {
+		{Type: TriggerTypeMouse, Event: EventTypeReleased, MouseButton: rl.MouseLeftButton},
 	},
     ActionReload: {
         {Type: TriggerTypeKey, Event: EventTypePressed, Key: rl.KeyR},

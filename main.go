@@ -13,7 +13,6 @@ import (
 	"cowboy-gorl/pkg/render"
 	"cowboy-gorl/pkg/scenes"
 	"cowboy-gorl/pkg/settings"
-	"cowboy-gorl/pkg/weapons"
 
 	rg "github.com/gen2brain/raylib-go/raygui"
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -85,9 +84,6 @@ func main() {
 	// gui
 	gui.InitBackend()
 
-	// weapons
-	weapons.Init()
-
 	// cursor
 	mousecursor.Init()
 	rl.HideCursor()
@@ -98,23 +94,23 @@ func main() {
 
 	// scenes
 	scenes.Sm.RegisterScene("dev", &scenes.DevScene{})
-	scenes.Sm.RegisterScene("dev_menu", &scenes.DevMenuScene{})
 	scenes.Sm.RegisterScene("gameover_menu", &scenes.GameoverMenuScene{})
 
-	scenes.Sm.EnableScene("dev_menu")
+	scenes.Sm.EnableScene("dev")
 
 	//rl.DisableCursor()
 
 	// GAME LOOP
 	for !rl.WindowShouldClose() {
 		//animation.UpdatePremades()
+        render.UpdateEffects()
 
 		rl.ClearBackground(rl.Black) // clearing the whole background, even behind the main rendertex
 		rl.BeginDrawing()
 
 		// begin drawing the world
 		render.BeginCustomRenderWorldspace()
-		rl.ClearBackground(rl.DarkGreen) // clear the main rendertex
+		rl.ClearBackground(rl.Blank) // clear the main rendertex
 
 		// Draw all registered Scenes
 		gem.UpdateEntities()
@@ -134,9 +130,10 @@ func main() {
 		rl.ClearBackground(rl.Blank) // clear the main rendertex
 
 		scenes.Sm.DrawScenesGUI()
+        gem.DrawEntitiesGUI()
 
 		render.EndCustomRender()
-		mousecursor.Draw()
+		//mousecursor.Draw()
 
 		// Draw Debug Info
 		rl.DrawFPS(10, 10)
