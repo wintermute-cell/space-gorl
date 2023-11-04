@@ -61,3 +61,7 @@ func (ent *GameStateHandlerEntity) Draw() {
 	// Draw logic for the entity
 	// ...
 }
+
+func (ent *GameStateHandlerEntity) SetCurrentPlayState(new_state PlayState) {
+    ent.currentPlayState = new_state
+}

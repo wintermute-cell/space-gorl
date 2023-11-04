@@ -39,7 +39,8 @@ type CursorEntity2D struct {
 
     movementLocked bool
 
-    shovelTimer util.Timer
+    shovelAnimationTimer util.Timer
+    shovelCooldown util.Timer
     isShovelDown bool
 
     isClickDown bool
@@ -59,7 +60,8 @@ func NewCursorEntity2D(gameState *GameStateHandlerEntity) *CursorEntity2D {
         frames_in_sprite: 4,
         cursorMode: CursorModeNormal,
         gameState: gameState,
-        shovelTimer: *util.NewTimer(0.44),
+        shovelAnimationTimer: *util.NewTimer(0.44),
+        shovelCooldown: *util.NewTimer(0.58),
 
         shovelStabSounds: []string{
             "shovel_stab1",
@@ -109,37 +111,14 @@ func lerp(a, b, t float32) float32 {
 	return a + t*(b-a)
 }
 
-func (ent *CursorEntity2D) Update() {
-	ent.BaseEntity2D.Update()
-
-    ent.movementLocked = false
-
+func (ent *CursorEntity2D) calcCursorMode() {
     ent.cursorMode = CursorModeNormal
     if (ent.gameState.MouseHoversSnowpile && ent.gameState.currentPlayState == PlayStateDigging) || ent.isShovelDown {
         ent.cursorMode = CursorModeShovel
     }
+}
 
-
-    switch ent.cursorMode {
-    case CursorModeNormal:
-        if input.Triggered(input.ActionClickHeld) {
-            ent.isClickDown = true
-        } else {
-            ent.isClickDown = false
-        }
-    case CursorModeShovel:
-        if input.Triggered(input.ActionClickDown) && !ent.isShovelDown {
-            ent.shovelTimer.ResetTime()
-            ent.isShovelDown = true
-        }
-        if ent.shovelTimer.Check() {
-            ent.isShovelDown = false
-        }
-        if ent.isShovelDown {
-            ent.movementLocked = true
-        }
-    }
-
+func (ent *CursorEntity2D) followMousePosition() {
     if !ent.movementLocked {
         currentPos := ent.GetPosition()
         targetPos := rl.GetMousePosition()
@@ -158,7 +137,36 @@ func (ent *CursorEntity2D) Update() {
             ent.SetPosition(targetPos)
         }
     }
+}
 
+func (ent *CursorEntity2D) Update() {
+	ent.BaseEntity2D.Update()
+
+    ent.movementLocked = false
+    ent.calcCursorMode()
+
+
+    switch ent.cursorMode {
+    case CursorModeNormal:
+        if input.Triggered(input.ActionClickHeld) {
+            ent.isClickDown = true
+        } else {
+            ent.isClickDown = false
+        }
+    case CursorModeShovel:
+        if input.Triggered(input.ActionClickDown) && !ent.isShovelDown && ent.shovelCooldown.Check() {
+            ent.shovelAnimationTimer.ResetTime()
+            ent.isShovelDown = true
+        }
+        if ent.shovelAnimationTimer.Check() {
+            ent.isShovelDown = false
+        }
+        if ent.isShovelDown {
+            ent.movementLocked = true
+        }
+    }
+
+    ent.followMousePosition()
 }
 
 func (ent *CursorEntity2D) DrawGUI() {

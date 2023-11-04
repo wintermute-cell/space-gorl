@@ -73,6 +73,13 @@ func (scn *DevScene) Init() {
     icebar := entities.NewIcebarEntity2D(rl.Vector2Zero(), gameStateHandler)
     gem.AddEntity(scn.scn_root_ent, icebar)
 
+    // TODO: adding an entity with a lower draw index after an entity with a higher one,
+    // for example adding dialogueManager after the cursor, causes drawing bugs.
+    // One approach to fix would be to replace the current sorting with just some stable sorting algo.
+
+    dialogueManager := entities.NewDialogueManagerEntity(gameStateHandler)
+    gem.AddEntity(scn.scn_root_ent, dialogueManager)
+
     gem.AddEntity(scn.scn_root_ent, cursor)
 
 	logging.Info("DevScene initialized.")
