@@ -121,7 +121,7 @@ func draw_entities_flattened(root proto.Entity, draw_gui bool) {
 	flattened_entities := flatten_entities(root, 0)
 
 	// Sort the flattened entities first by their GetDrawIndex() and then by their depth
-	sort.Slice(flattened_entities, func(i, j int) bool {
+	sort.SliceStable(flattened_entities, func(i, j int) bool {
 		// If indices are equal, sort by depth (to respect tree structure)
 		if flattened_entities[i].Entity.GetDrawIndex() == flattened_entities[j].Entity.GetDrawIndex() {
 			return flattened_entities[i].Depth < flattened_entities[j].Depth

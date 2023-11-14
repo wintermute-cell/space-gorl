@@ -73,9 +73,9 @@ func (rs *RenderStage) Prepare() {
                 rl.GetTime()+333*8) * (traumaSq) * float64(Rs.RenderResolution.X)
 
             offsetX := Rs.shakePerlin.Noise1D(
-                rl.GetTime()      *8) * traumaSq * float64(Rs.RenderResolution.X) * 2
+                rl.GetTime()      *8) * traumaSq * float64(Rs.RenderResolution.X) * 3
             offsetY := Rs.shakePerlin.Noise1D(
-                (rl.GetTime()+666)*8) * traumaSq * float64(Rs.RenderResolution.Y) * 2
+                (rl.GetTime()+666)*8) * traumaSq * float64(Rs.RenderResolution.Y) * 3
             posOffs := rl.Vector2Add(
                 rs.SSCamera.Offset,
                 rl.NewVector2(float32(offsetX), float32(offsetY)))

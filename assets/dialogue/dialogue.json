@@ -1,0 +1,339 @@
+{
+    "text": "Brrr! It's like a snowman convention in here! Do you think they'd mind an extra member?",
+    "responses": [
+        {
+            "text": "You'd be the star of the show!",
+            "influence": {
+                "Benevolence": 0.5,
+                "Power": 0.1
+            },
+            "value": 1.0
+        },
+        {
+            "text": "We used to build a big Snowman each winter solstice, remember?",
+            "influence": {
+                "Tradition": 0.5,
+                "Security": 0.1,
+                "Universalism": 0.1
+            },
+            "value": 1.0
+        },
+        {
+            "text": "As long as we don't cause any trouble in snowman land!",
+            "influence": {
+                "Conformity": 0.5,
+                "Security": 0.1
+            },
+            "value": 1.0
+        }
+    ],
+    "Ep": {
+    },
+    "Children": [
+        {
+            "text": "Look at these trees covered in snow, feels like a whole new world, doesn't it?",
+            "responses": [
+                {
+                    "text": "Nature's makeovers are always stunning.",
+                    "influence": {
+                        "Universalism": 0.3,
+                        "Stimulation": 0.1,
+                        "Power": -0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Definitely, it's like an invitation for an adventure.",
+                    "influence": {
+                        "Stimulation": 0.3,
+                        "Achievement": 0.2,
+                        "SelfDirection": 0.1,
+                        "Security": -0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Yeah, there's a unique sense of calm here.",
+                    "influence": {
+                        "Security": 0.5,
+                        "Benevolence": 0.1
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+            },
+            "Children": []
+        },
+        {
+            "text": "I love how the snow sparkles in the sunlight, like tiny diamonds, you know?",
+            "responses": [
+                {
+                    "text": "It's moments like these that make everything feel special.",
+                    "influence": {
+                        "Hedonism": 0.2,
+                        "Universalism": 0.2,
+                        "Power": -0.05
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "It really shows the beauty of our world.",
+                    "influence": {
+                        "Stimulation": 0.2,
+                        "Adventure": 0.1,
+                        "Hedonism": 0.2,
+                        "Security": -0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Right, it's about finding joy in the small things.",
+                    "influence": {
+                        "SelfDirection": 0.2,
+                        "Power": 0.1,
+                        "Benevolence": 0.1
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+            },
+            "Children": []
+        },
+        {
+            "text": "Never thought I'd be stuck so deep in snow, but it's kind of a cool experience, isn't it?",
+            "responses": [
+                {
+                    "text": "Life's full of surprises, makes for great stories!",
+                    "influence": {
+                        "Achievement": 0.3,
+                        "Power": 0.05
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Totally, it's all about how you handle the unexpected.",
+                    "influence": {
+                        "SelfDirection": 0.2,
+                        "Power": 0.2,
+                        "Achievement": 0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Definitely, as long as we stay safe, it's a fun adventure.",
+                    "influence": {
+                        "Security": 0.4,
+                        "Conformity": 0.1
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+            },
+            "Children": []
+        },
+        {
+            "text": "Have you been in a situation like this before, or is this a first for you too?",
+            "responses": [
+                {
+                    "text": "First time for me, pretty unique experience!",
+                    "influence": {
+                        "Stimulation": 0.2,
+                        "Benevolence": 0.2
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "I've been on a few adventures, but this is different.",
+                    "influence": {
+                        "SelfDirection": 0.3,
+                        "Achievement": 0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "I usually play it safe, so this is new!",
+                    "influence": {
+                        "Security": 0.4
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+            },
+            "Children": []
+        },
+        {
+            "text": "It's incredible how you navigate around here with ease. It must have taken a lot of practice!",
+            "responses": [
+                {
+                    "text": "Every challenge faced is a good step. It's all about pushing limits.",
+                    "influence": {
+                        "Stimulation": 0.1,
+                        "Achievement": 0.3
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "I learned from the best, following traditions of great explorers.",
+                    "influence": {
+                        "Tradition": 0.3,
+                        "Achievement": 0.1
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "It's about understanding and respecting the wilderness.",
+                    "influence": {
+                        "Security": 0.3,
+                        "Universalism": 0.1
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+                "Achievement": 0.5,
+                "Stimulation": 0.2
+            },
+            "Children": []
+        },
+        {
+            "text": "The thrill of exploring must be exhilarating. You seem to have a real zest for adventure!",
+            "responses": [
+                {
+                    "text": "Choosing my own path is what life's all about.",
+                    "influence": {
+                        "SelfDirection": 0.5
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "There's nothing like the rush of discovering something new.",
+                    "influence": {
+                        "Hedonism": 0.1,
+                        "Stimulation": 0.3
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Every new trail is a story waiting to be experienced.",
+                    "influence": {
+                        "Hedonism": 0.1,
+                        "Achievement": 0.3
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+                "SelfDirection": 0.4,
+                "Hedonism": 0.2
+            },
+            "Children": []
+        },
+        {
+            "text": "I've always admired those who take the time to appreciate nature's wonders...",
+            "responses": [
+                {
+                    "text": "It's important to protect and cherish these natural wonders.",
+                    "influence": {
+                        "Universalism": 0.3,
+                        "Benevolence": 0.2
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Nature teaches us to be kind and respectful, to it and to each other.",
+                    "influence": {
+                        "Benevolence": 0.3,
+                        "Universalism": 0.2
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Exploring nature is about coexisting harmoniously with it.",
+                    "influence": {
+                        "Universalism": 0.2,
+                        "Security": 0.3
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+                "Benevolence": 0.4,
+                "Universalism": 0.4
+            },
+            "Children": []
+        },
+        {
+            "text": "Leading the way through such tough terrain, you must feel a sense of accomplishment and control.",
+            "responses": [
+                {
+                    "text": "It's about setting goals and achieving them, one step at a time.",
+                    "influence": {
+                        "Achievement": 0.3,
+                        "Power": 0.2
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "It's less about power and more about knowing one's limits.",
+                    "influence": {
+                        "SelfDirection": 0.25,
+                        "Power": 0.25
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "The real goal is overcoming the challenges nature presents.",
+                    "influence": {
+                        "Achievement": 0.3,
+                        "Security": 0.1
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+                "Achievement": 0.4,
+                "Power": 0.4
+            },
+            "Children": []
+        },
+        {
+            "text": "Following the trails blazed by others before us is a great way to learn.",
+            "responses": [
+                {
+                    "text": "Respecting the old trails is how we learn to create our own.",
+                    "influence": {
+                        "Tradition": 0.3,
+                        "SelfDirection": 0.2
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "There's a balance in forging new paths and honoring the past.",
+                    "influence": {
+                        "Conformity": 0.2,
+                        "Tradition": 0.3
+                    },
+                    "value": 1.0
+                },
+                {
+                    "text": "Tradition in hiking teaches us about respect and safety.",
+                    "influence": {
+                        "Security": 0.3,
+                        "Tradition": 0.2
+                    },
+                    "value": 1.0
+                }
+            ],
+            "Ep": {
+                "Conformity": 0.4,
+                "Tradition": 0.4
+            },
+            "Children": []
+        }
+    ]
+}
+

@@ -15,7 +15,9 @@ type GameStateHandlerEntity struct {
 	proto.BaseEntity
 
 	// Custom Fields
-    currentPlayState PlayState
+    CurrentPlayState PlayState
+    PlayerEmotionalProfile *EmotionalProfile
+    IceMeterValue float32
 
     // Game State Fields
     MouseHoversSnowpile bool
@@ -26,7 +28,9 @@ func NewGameStateHandlerEntity() *GameStateHandlerEntity {
         BaseEntity: proto.BaseEntity {
             Name: "PlayStateHandler",
         },
-        currentPlayState: PlayStateDigging,
+        CurrentPlayState: PlayStateDigging,
+        PlayerEmotionalProfile: &EmotionalProfile{},
+        IceMeterValue: 100,
 
         MouseHoversSnowpile: false,
     }
@@ -63,5 +67,5 @@ func (ent *GameStateHandlerEntity) Draw() {
 }
 
 func (ent *GameStateHandlerEntity) SetCurrentPlayState(new_state PlayState) {
-    ent.currentPlayState = new_state
+    ent.CurrentPlayState = new_state
 }

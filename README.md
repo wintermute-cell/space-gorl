@@ -32,7 +32,7 @@ Detailed Documentation on many different subjects can be found here:
 ## Assets in use
 A list of all external assets currently in use, and a short note on usage conditions / licensing.
 
-- [Snakes Authentic Gun Sounds 2] (No action required, credit appreciated)
+- [Universal UI/Menu Soundpack](https://ellr.itch.io/universal-ui-soundpack) (Attribution, CC BY 4.0)
 
 ## Resources
 - Sounds

@@ -26,6 +26,9 @@ func DrawTextBoxedSelectable(font rl.Font, text string, rec rl.Rectangle, fontSi
 	startLine := -1
 	endLine := -1
 	lastk := -1
+        lastWhitespace := -1
+    lastWhitespaceWidth := float32(0)
+
 
 	i := 0
 	for k := 0; i < length; k++ {
@@ -38,19 +41,25 @@ func DrawTextBoxedSelectable(font rl.Font, text string, rec rl.Rectangle, fontSi
 		}
 
 		if state == MEASURE_STATE {
-			if codepoint == ' ' || codepoint == '\t' || codepoint == '\n' {
-				endLine = i
-			}
+            if codepoint == ' ' || codepoint == '\t' || codepoint == '\n' {
+                lastWhitespace = i
+                lastWhitespaceWidth = textOffsetX + glyphWidth
+            }
 
-			if textOffsetX+glyphWidth > rec.Width {
-				endLine = i
-				state = DRAW_STATE
-			} else if i+1 == length {
-				endLine = i
-				state = DRAW_STATE
-			} else if codepoint == '\n' {
-				state = DRAW_STATE
-			}
+            if textOffsetX+glyphWidth > rec.Width {
+                if lastWhitespace >= 0 {
+                    endLine = lastWhitespace
+                    textOffsetX = lastWhitespaceWidth
+                } else {
+                    endLine = i
+                }
+                state = DRAW_STATE
+            } else if i+codepointByteCount >= length {
+                endLine = length
+                state = DRAW_STATE
+            } else if codepoint == '\n' {
+                state = DRAW_STATE
+            }
 
 			if state == DRAW_STATE {
 				textOffsetX = 0

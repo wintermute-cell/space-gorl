@@ -11,7 +11,8 @@ type IcebarEntity2D struct {
 	proto.BaseEntity2D
 
 	// Custom Fields
-    sprite rl.Texture2D
+    spriteBackground rl.Texture2D
+    spriteForeground rl.Texture2D
 
     gameState *GameStateHandlerEntity
 }
@@ -22,7 +23,8 @@ func NewIcebarEntity2D(position rl.Vector2, gameState *GameStateHandlerEntity) *
 
 		// Initialize custom fields here
 		// ...
-        sprite: rl.LoadTexture("sprites/icebar/icebar.png"),
+        spriteBackground: rl.LoadTexture("sprites/icebar/icebar_bg.png"),
+        spriteForeground: rl.LoadTexture("sprites/icebar/icebar_fg.png"),
         gameState: gameState,
 	}
 	return new_ent
@@ -59,9 +61,16 @@ func (ent *IcebarEntity2D) Draw() {
 
 func (ent *IcebarEntity2D) DrawGUI() {
     rl.DrawTexturePro(
-        ent.sprite,
-        rl.NewRectangle(0, 0, float32(ent.sprite.Width), float32(ent.sprite.Height)),
-        rl.NewRectangle(0, 0, float32(ent.sprite.Width), float32(ent.sprite.Height)),
+        ent.spriteBackground,
+        rl.NewRectangle(0, 0, float32(ent.spriteBackground.Width), float32(ent.spriteBackground.Height)),
+        rl.NewRectangle(0, 0, float32(ent.spriteBackground.Width), float32(ent.spriteBackground.Height)),
+        rl.Vector2Zero(),
+        0, rl.White)
+    drawnWidth := float32(ent.spriteForeground.Width) * (ent.gameState.IceMeterValue/100)
+    rl.DrawTexturePro(
+        ent.spriteForeground,
+        rl.NewRectangle(0, 0, drawnWidth, float32(ent.spriteBackground.Height)),
+        rl.NewRectangle(0, 0, drawnWidth, float32(ent.spriteBackground.Height)),
         rl.Vector2Zero(),
         0, rl.White)
 }

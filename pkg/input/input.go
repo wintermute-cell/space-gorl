@@ -1,7 +1,9 @@
 package input
 
 import (
+	"cowboy-gorl/pkg/render"
 	"cowboy-gorl/pkg/util"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -151,4 +153,15 @@ func GetMovementVector() rl.Vector2 {
 func GetCursorPosition() rl.Vector2 {
 	// TODO: add gamepad stuff here. position for gamepad has to be tracked over time.
 	return rl.GetMousePosition()
+}
+
+// Returns true if the the action was triggered while the mouse cursor was
+// inside the given area, in world space coordinates.
+func TriggeredInArea(action Action, area rl.Rectangle) bool {
+    if rl.CheckCollisionPointRec(render.ScreenToWorldPoint(GetCursorPosition()), area) {
+        if Triggered(action) {
+            return true
+        }
+    }
+    return false
 }

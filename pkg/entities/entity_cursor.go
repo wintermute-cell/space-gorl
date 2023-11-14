@@ -113,7 +113,7 @@ func lerp(a, b, t float32) float32 {
 
 func (ent *CursorEntity2D) calcCursorMode() {
     ent.cursorMode = CursorModeNormal
-    if (ent.gameState.MouseHoversSnowpile && ent.gameState.currentPlayState == PlayStateDigging) || ent.isShovelDown {
+    if (ent.gameState.MouseHoversSnowpile && ent.gameState.CurrentPlayState == PlayStateDigging) || ent.isShovelDown {
         ent.cursorMode = CursorModeShovel
     }
 }

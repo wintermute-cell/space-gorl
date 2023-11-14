@@ -1,0 +1,6 @@
+INFO: 2023/11/14 16:12:07 main.go:30: Logging initialized
+WARN: 2023/11/14 16:12:07 main.go:34: Settings loading unsuccessful, using fallback.
+INFO: 2023/11/14 16:12:07 render.go:297: Custom Rendering Environment initialized.
+INFO: 2023/11/14 16:12:07 main.go:51: Custom rendering initialized.
+INFO: 2023/11/14 16:12:07 collision.go:88: Initialized Collision System
+FATL: 2023/11/14 16:12:07 entity_dialogue_data_handler.go:89: Error while loading dialogue.json file: open dialogue/dialogue.json: no such file or directory
