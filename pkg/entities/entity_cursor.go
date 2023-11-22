@@ -48,9 +48,11 @@ type CursorEntity2D struct {
     // sounds
     shovelStabSounds []string
     shovelThrowSounds []string
+
+    snowpileReference *SnowpileEntity2D
 }
 
-func NewCursorEntity2D(gameState *GameStateHandlerEntity) *CursorEntity2D {
+func NewCursorEntity2D(gameState *GameStateHandlerEntity, snowpile *SnowpileEntity2D) *CursorEntity2D {
 	new_ent := &CursorEntity2D{
 		BaseEntity2D: proto.BaseEntity2D{Transform: proto.Transform2D{Position: rl.Vector2Zero(), Rotation: 0, Scale: rl.Vector2One()}},
 
@@ -73,6 +75,8 @@ func NewCursorEntity2D(gameState *GameStateHandlerEntity) *CursorEntity2D {
             "shovel_throw2",
             "shovel_throw3",
         },
+
+        snowpileReference: snowpile,
 	}
 	return new_ent
 }
@@ -129,12 +133,12 @@ func (ent *CursorEntity2D) followMousePosition() {
             dynamicFactor := lerpFactor / (1.0 + 0.1*dist*dist/128) 
 
             // Calculate new smoothed position
-            newX := lerp(currentPos.X, targetPos.X, dynamicFactor)
-            newY := lerp(currentPos.Y, targetPos.Y, dynamicFactor)
+            newX := float32(int32(lerp(currentPos.X, targetPos.X, dynamicFactor)))
+            newY := float32(int32(lerp(currentPos.Y, targetPos.Y, dynamicFactor)))
 
             ent.SetPosition(rl.NewVector2(newX, newY))
         } else {
-            ent.SetPosition(targetPos)
+            ent.SetPosition(rl.NewVector2(float32(int32(targetPos.X)), float32(int32(targetPos.Y))))
         }
     }
 }
@@ -184,6 +188,7 @@ func (ent *CursorEntity2D) DrawGUI() {
             render.CameraShake(0.2)
             throwIdx := rand.Intn(3)
             audio.PlaySound(ent.shovelThrowSounds[throwIdx])
+            ent.snowpileReference.Dig()
         }
         sprite_idx = ent.sprite_index_shovel
         if ent.isShovelDown {

@@ -33,3 +33,6 @@ clean:
 	rm -r $(BUILD_PATH)/*
 	mkdir -p $(BUILD_PATH)
 	cp -r assets/* $(BUILD_PATH)
+
+lint:
+	nilaway main.go

@@ -1,6 +1,6 @@
 {
-    "ScreenWidth": 743,
-    "ScreenHeight": 1080,
+    "ScreenWidth": 512,
+    "ScreenHeight": 744,
     "RenderWidth": 128,
     "RenderHeight": 186,
     "TargetFps": 144,

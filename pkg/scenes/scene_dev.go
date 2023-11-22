@@ -42,7 +42,9 @@ func (scn *DevScene) Init() {
 
 
     gameStateHandler := entities.NewGameStateHandlerEntity()
-    cursor := entities.NewCursorEntity2D(gameStateHandler)
+    dialogueManager := entities.NewDialogueManagerEntity(gameStateHandler)
+    snowpile := entities.NewSnowpileEntity2D(origin, gameStateHandler, dialogueManager)
+    cursor := entities.NewCursorEntity2D(gameStateHandler, snowpile)
 
     bg := entities.NewBackgroundEntity2D(origin, 0, rl.Vector2One())
     gem.AddEntity(scn.scn_root_ent, bg)
@@ -57,7 +59,6 @@ func (scn *DevScene) Init() {
     lightBelow := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/light_below.png"), true, 150, false)
     gem.AddEntity(scn.scn_root_ent, lightBelow)
 
-    snowpile := entities.NewSnowpileEntity2D(origin, gameStateHandler)
     gem.AddEntity(scn.scn_root_ent, snowpile)
 
     frostVignette := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/frost_vignette.png"), false, 130, false)
@@ -77,7 +78,6 @@ func (scn *DevScene) Init() {
     // for example adding dialogueManager after the cursor, causes drawing bugs.
     // One approach to fix would be to replace the current sorting with just some stable sorting algo.
 
-    dialogueManager := entities.NewDialogueManagerEntity(gameStateHandler)
     gem.AddEntity(scn.scn_root_ent, dialogueManager)
 
     gem.AddEntity(scn.scn_root_ent, cursor)

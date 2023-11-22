@@ -7,8 +7,8 @@ import (
 
 type GameSettings struct {
 	// Display
-	ScreenWidth     int  `json:"screenWidth"`     // 743
-	ScreenHeight    int  `json:"screenHeight"`    // 1080
+	ScreenWidth     int  `json:"screenWidth"`     // 512
+	ScreenHeight    int  `json:"screenHeight"`    // 744
 	RenderWidth     int  `json:"renderWidth"`     // 128
 	RenderHeight    int  `json:"renderHeight"`    // 186
 	TargetFps       int  `json:"targetFps"`       // 144
@@ -35,8 +35,8 @@ func CurrentSettings() *GameSettings {
 
 func FallbackSettings() {
 	settings = &GameSettings{
-		ScreenWidth:  743,
-		ScreenHeight:  1080,
+		ScreenWidth:  512,
+		ScreenHeight:  744,
 		RenderWidth:  128,
 		RenderHeight:  186,
 		TargetFps:  144,
