@@ -60,12 +60,6 @@ func (rs *RenderStage) Prepare() {
 
         if rs.WSCamera != nil {
             rs.trueWSCamera = rl.NewCamera2D(rs.WSCamera.Offset, rs.WSCamera.Target, rs.WSCamera.Rotation, rs.WSCamera.Zoom)
-            //offsetX := Rs.shakePerlin.Noise1D(rl.GetTime()*8)       * (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma)) * 16
-            //offsetY := Rs.shakePerlin.Noise1D((rl.GetTime()+666)*8) * (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma)) * 16
-            //shakeVector := rl.NewVector2(float32(offsetX), float32(offsetY))
-            //rs.trueWSCamera.Offset = rl.Vector2Add(
-            //    rs.trueWSCamera.Offset,
-            //    shakeVector)
         }
         if rs.SSCamera != nil {
             traumaSq := (float64(Rs.cameraTrauma) * float64(Rs.cameraTrauma))

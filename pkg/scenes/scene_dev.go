@@ -29,6 +29,7 @@ type DevScene struct {
 }
 
 func (scn *DevScene) Init() {
+
 	scn.g = gui.NewGui()
 	scn.scn_root_ent = &proto.BaseEntity{Name: "DevSceneRoot"}
 	gem.AddEntity(gem.Root(), scn.scn_root_ent)
@@ -37,50 +38,17 @@ func (scn *DevScene) Init() {
         rl.Vector2Scale(render.Rs.RenderResolution, 0.5),
         )
 
-    origin := rl.NewVector2(0, 16)
-    num_frames := int32(32)
-
-
-    gameStateHandler := entities.NewGameStateHandlerEntity()
-    dialogueManager := entities.NewDialogueManagerEntity(gameStateHandler)
-    snowpile := entities.NewSnowpileEntity2D(origin, gameStateHandler, dialogueManager)
-    cursor := entities.NewCursorEntity2D(gameStateHandler, snowpile)
-
-    bg := entities.NewBackgroundEntity2D(origin, 0, rl.Vector2One())
-    gem.AddEntity(scn.scn_root_ent, bg)
-    snowL := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowL.png"), num_frames)
-    gem.AddEntity(scn.scn_root_ent, snowL)
-    bgFog := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/bg_fog.png"), false, 155, true)
-    gem.AddEntity(scn.scn_root_ent, bgFog)
-
-    girl := entities.NewGirlEntity2D(origin, num_frames)
-    gem.AddEntity(scn.scn_root_ent, girl)
-
-    lightBelow := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/light_below.png"), true, 150, false)
-    gem.AddEntity(scn.scn_root_ent, lightBelow)
-
-    gem.AddEntity(scn.scn_root_ent, snowpile)
-
-    frostVignette := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/frost_vignette.png"), false, 130, false)
-    gem.AddEntity(scn.scn_root_ent, frostVignette)
-    vignette := entities.NewEffectLayerEntity2D(origin, rl.LoadTexture("sprites/effect_layers/vignette.png"), false, 100, false)
-    gem.AddEntity(scn.scn_root_ent, vignette)
-
-    snowM := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowM.png"), num_frames)
-    gem.AddEntity(scn.scn_root_ent, snowM)
-    snowS := entities.NewSnowEntity2D(origin, rl.LoadTexture("sprites/snow/snowS.png"), num_frames)
-    gem.AddEntity(scn.scn_root_ent, snowS)
-
-    icebar := entities.NewIcebarEntity2D(rl.Vector2Zero(), gameStateHandler)
-    gem.AddEntity(scn.scn_root_ent, icebar)
-
-    // TODO: adding an entity with a lower draw index after an entity with a higher one,
-    // for example adding dialogueManager after the cursor, causes drawing bugs.
-    // One approach to fix would be to replace the current sorting with just some stable sorting algo.
-
-    gem.AddEntity(scn.scn_root_ent, dialogueManager)
-
+    cursor := entities.NewCursorEntity2D()
     gem.AddEntity(scn.scn_root_ent, cursor)
+    
+    spaceBackground := entities.NewSpaceBackgroundEntity2D()
+    gem.AddEntity(scn.scn_root_ent, spaceBackground)
+
+    pyramid := entities.NewPyramidEntity2D()
+    gem.AddEntity(scn.scn_root_ent, pyramid)
+
+    waveManager := entities.NewWaveManagerEntity()
+    gem.AddEntity(scn.scn_root_ent, waveManager)
 
 	logging.Info("DevScene initialized.")
 }

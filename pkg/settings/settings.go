@@ -7,10 +7,10 @@ import (
 
 type GameSettings struct {
 	// Display
-	ScreenWidth     int  `json:"screenWidth"`     // 512
-	ScreenHeight    int  `json:"screenHeight"`    // 744
-	RenderWidth     int  `json:"renderWidth"`     // 128
-	RenderHeight    int  `json:"renderHeight"`    // 186
+	ScreenWidth     int  `json:"screenWidth"`     // 1280
+	ScreenHeight    int  `json:"screenHeight"`    // 720
+	RenderWidth     int  `json:"renderWidth"`     // 320
+	RenderHeight    int  `json:"renderHeight"`    // 180
 	TargetFps       int  `json:"targetFps"`       // 144
 	Fullscreen      bool `json:"fullscreen"`      // false
 	EnableCrtEffect bool `json:"enableCrtEffect"` // true
@@ -35,10 +35,10 @@ func CurrentSettings() *GameSettings {
 
 func FallbackSettings() {
 	settings = &GameSettings{
-		ScreenWidth:  512,
-		ScreenHeight:  744,
-		RenderWidth:  128,
-		RenderHeight:  186,
+		ScreenWidth:  1280,
+		ScreenHeight:  720,
+		RenderWidth:  320,
+		RenderHeight:  180,
 		TargetFps:  144,
 		Fullscreen:  false,
 		EnableCrtEffect:  true,

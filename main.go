@@ -7,8 +7,10 @@ import (
 	"cowboy-gorl/pkg/gui"
 	"cowboy-gorl/pkg/lighting"
 	"cowboy-gorl/pkg/logging"
+	"cowboy-gorl/pkg/messaging"
 	mousecursor "cowboy-gorl/pkg/mouse_cursor"
 	"cowboy-gorl/pkg/physics"
+
 	//"cowboy-gorl/pkg/profiling"
 	"cowboy-gorl/pkg/render"
 	"cowboy-gorl/pkg/scenes"
@@ -51,8 +53,8 @@ func main() {
 	logging.Info("Custom rendering initialized.")
 
 	// initialize audio
-	audio.InitAudio()
-	defer audio.DeinitAudio()
+	audio.InitAudioV2()
+	defer audio.DeinitAudioV2()
 
 	// collision
 	collision.InitCollision()
@@ -84,6 +86,9 @@ func main() {
 	// gui
 	gui.InitBackend()
 
+    // messaging
+    messaging.InitMessageSystem()
+
 	// cursor
 	mousecursor.Init()
 	rl.HideCursor()
@@ -91,6 +96,12 @@ func main() {
 	// raygui
 	rg.SetStyle(rg.DEFAULT, rg.TEXT_COLOR_NORMAL, 0x000000)
 	rg.SetStyle(rg.DEFAULT, rg.TEXT_SIZE, 24)
+
+    
+    // use 1x1 white texture to draw shapes.
+    // this fixes UV coordinates not working properly for the rectangle.
+    // (see: https://github.com/raysan5/raylib/issues/1730)
+    rl.SetShapesTexture(rl.LoadTexture("sprites/1x1white.png"), rl.NewRectangle(0, 0, 1, 1))
 
 	// scenes
 	scenes.Sm.RegisterScene("dev", &scenes.DevScene{})
@@ -110,7 +121,7 @@ func main() {
 
 		// begin drawing the world
 		render.BeginCustomRenderWorldspace()
-		rl.ClearBackground(rl.Blank) // clear the main rendertex
+		rl.ClearBackground(rl.Black) // clear the main rendertex
 
 		// Draw all registered Scenes
 		gem.UpdateEntities()

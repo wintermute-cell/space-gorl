@@ -1,8 +1,8 @@
 {
-    "ScreenWidth": 512,
-    "ScreenHeight": 744,
-    "RenderWidth": 128,
-    "RenderHeight": 186,
+    "ScreenWidth": 1280,
+    "ScreenHeight": 720,
+    "RenderWidth": 320,
+    "RenderHeight": 180,
     "TargetFps": 144,
     "Fullscreen": false,
     "EnableCrtEffect": true,

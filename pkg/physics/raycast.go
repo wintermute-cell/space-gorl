@@ -68,3 +68,53 @@ func Raycast(origin, direction rl.Vector2, length float32, categoriesToHit Colli
     
     return results
 }
+
+// Circlecast checks for colliders within a specified radius around a position,
+// returning a list of all colliders that were hit within the specified categories.
+func Circlecast(position rl.Vector2, radius float32, categoriesToHit CollisionCategory) []RaycastHit {
+    if radius <= 0 {
+        logging.Warning("Attempted zero or negative radius circlecast.")
+        return []RaycastHit{}
+    }
+
+    // Translate input values to simulation scale
+    simulationPosition := pixelToSimulationScaleV(position)
+    simulationRadius := pixelToSimulationScale(radius)
+
+    // Create a circular shape for the circlecast
+    circleShape := box2d.NewB2CircleShape()
+    circleShape.M_radius = float64(simulationRadius)
+
+    // Create a transform for the circle shape to represent its position
+    circleTransform := box2d.B2Transform{}
+    circleTransform.P = box2d.MakeB2Vec2(float64(simulationPosition.X), float64(simulationPosition.Y))
+
+    var results []RaycastHit
+
+    // Iterate over all bodies in the physics world
+    for b := State.physicsWorld.GetBodyList(); b != nil; b = b.GetNext() {
+        for f := b.GetFixtureList(); f != nil; f = f.GetNext() {
+            // Check if the fixture's category matches one of the desired categories
+            if (f.GetFilterData().CategoryBits & uint16(categoriesToHit)) > 0 {
+                fixtureShape := f.GetShape()
+
+                // Check for overlap between the circle shape and the fixture's shape
+                if box2d.B2TestOverlapShapes(circleShape, 0, fixtureShape, 0, circleTransform, f.GetBody().GetTransform()) {
+                    // Create a RaycastHit for the intersecting fixture
+                    hit := RaycastHit{
+                        HitCollider: f.GetBody().GetUserData().(*Collider),
+                        // IntersectionPoint and HitNormal calculation might be complex in this case
+                    }
+                    results = append(results, hit)
+                }
+            }
+        }
+    }
+
+    // Optionally, sort results by distance to the circle's center
+    sort.Slice(results, func(i, j int) bool {
+        return rl.Vector2Distance(position, results[i].IntersectionPoint) < rl.Vector2Distance(position, results[j].IntersectionPoint)
+    })
+
+    return results
+}

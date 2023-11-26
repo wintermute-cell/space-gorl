@@ -5,7 +5,7 @@ out vec4 fragColor;
 
 //uniform vec2 resolution;
 #define CHROMATIC_ABBERATION 1.1
-#define RESOLUTION vec2(640, 480)
+#define RESOLUTION vec2(320, 180)
 //uniform float time;
 //#define TIME 0.0 // i guess if time is always zero we just miss out on animation?
 uniform float TIME;

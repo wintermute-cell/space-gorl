@@ -1,0 +1,102 @@
+INFO: 2023/11/25 17:19:29 main.go:32: Logging initialized
+WARN: 2023/11/25 17:19:29 main.go:36: Settings loading unsuccessful, using fallback.
+INFO: 2023/11/25 17:19:29 render.go:291: Custom Rendering Environment initialized.
+INFO: 2023/11/25 17:19:29 main.go:53: Custom rendering initialized.
+INFO: 2023/11/25 17:19:29 collision.go:88: Initialized Collision System
+INFO: 2023/11/25 17:19:29 scene_dev.go:53: DevScene initialized.
+WARN: 2023/11/25 17:19:31 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:31 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:31 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:31 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:31 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:31 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:31 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:32 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:32 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:32 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:32 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:32 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:33 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:33 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:33 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:34 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:34 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:34 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:34 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:34 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:35 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:35 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:35 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:35 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:35 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:35 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:36 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+DEBG: 2023/11/25 17:19:36 projectile_laser.go:63: Projectile hit something
+WARN: 2023/11/25 17:19:36 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:36 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+DEBG: 2023/11/25 17:19:36 projectile_laser.go:63: Projectile hit something
+WARN: 2023/11/25 17:19:36 audiov2.go:111: Attempted to play sound that is not registered: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:112: Registering missing sound: audio/sounds/weapons/ballistic_small.ogg
+ERRO: 2023/11/25 17:19:36 audiov2.go:76: Failed to load wave for path: audio/sounds/weapons/ballistic_small.ogg
+WARN: 2023/11/25 17:19:36 audiov2.go:116: Failed to register missing sound: audio/sounds/weapons/ballistic_small.ogg
+DEBG: 2023/11/25 17:19:36 projectile_laser.go:63: Projectile hit something
+INFO: 2023/11/25 17:19:37 scene_dev.go:59: DevScene de-initialized.

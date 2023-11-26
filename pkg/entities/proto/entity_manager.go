@@ -1,3 +1,6 @@
+// TODO: REMOVE THIS FILE, REMOVE ALL MENTIONS/USAGES
+
+
 // EntityManager provides a manager for game entities, automating the calling
 // of their Init(), Deinit() and Update() functions,
 // A EntityManager also features enabling/disabling, and ordering of entities

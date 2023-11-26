@@ -11,7 +11,7 @@ import (
 //  TYPES
 // -------------------
 
-type CollisionCallback func()
+type CollisionCallback func(values ...any)
 type BodyType uint8
 const (
     BodyTypeStatic BodyType = iota
@@ -84,6 +84,12 @@ func (col *Collider) SetDensity(density float32) *Collider {
 // Set the linear damping of the collider. The default damping is 1.0
 func (col *Collider) SetLinearDamping(damping float32) *Collider {
     col.GetB2Body().SetLinearDamping(float64(damping))
+    return col
+}
+
+// Set the angular damping of the collider. The default damping is 1.0
+func (col *Collider) SetAngularDamping(damping float32) *Collider {
+    col.GetB2Body().SetAngularDamping(float64(damping))
     return col
 }
 
