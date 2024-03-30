@@ -79,7 +79,7 @@ func (ent *PyramidEntity2D) Update() {
             pos = msg.KilledPosition
         }
         pos = rl.Vector2Subtract(pos, ent.GetPosition()) // counteract relative positioning
-        popup := NewTextPopupEntity2D(fmt.Sprintf("+%v", msg.Amount), pos, 0.0, rl.Vector2One(), 0.3)
+        popup := NewTextPopupEntity2D(fmt.Sprintf("+%v0", msg.Amount), pos, 0.0, rl.Vector2One(), 0.3)
         gem.AddEntity(ent, popup)
         ent.Score += msg.Amount
     }
@@ -87,7 +87,7 @@ func (ent *PyramidEntity2D) Update() {
 
 func (ent *PyramidEntity2D) DrawGUI() {
     rl.DrawText(fmt.Sprintf("Health: %v", ent.Hitpoints), 10, 10, 8, rl.White)
-    rl.DrawText(fmt.Sprintf("Score: %v", ent.Score), 10, 20, 8, rl.White)
+    rl.DrawText(fmt.Sprintf("Score: %v0", ent.Score), 10, 20, 8, rl.White)
 
 }
 

@@ -25,6 +25,7 @@ const (
 type Collider struct {
     body *box2d.B2Body
     callbacks map[CollisionCategory]CollisionCallback
+    owner any
 }
 
 func newCollider(body *box2d.B2Body) *Collider {
@@ -43,6 +44,12 @@ func newCollider(body *box2d.B2Body) *Collider {
 // Returns a pointer to the Box2D body of the collider.
 func (c *Collider) GetB2Body() *box2d.B2Body {
     return c.body
+}
+
+// Return the owner of the collider.
+// CAREFUL: this may return any type!
+func (c *Collider) GetOwner() any {
+    return c.owner
 }
 
 func (c *Collider) GetCallbacks() map[CollisionCategory]CollisionCallback {
@@ -133,6 +140,12 @@ func (col *Collider) SetIsSensor(is_sensor bool) *Collider {
     return col
 }
 
+// Set the owner of the collider. This may be an entity for example.
+func (col *Collider) SetOwner(owner any) *Collider {
+    col.owner = owner
+    return col
+}
+
 // -------------------
 //  Generic Functions
 // -------------------
@@ -140,6 +153,7 @@ func (col *Collider) SetIsSensor(is_sensor bool) *Collider {
 // DestroyCollider removes the given collider from the physics world.
 func DestroyCollider(collider *Collider) {
     State.destructionQueue = append(State.destructionQueue, collider.GetB2Body())
+    collider = &Collider{}
 }
 
 // -------------------

@@ -21,20 +21,20 @@ func (h *Hivemind) AddController(controller AiController) {
 
 func (h *Hivemind) RemoveController(controller AiController) {
 	idx := util.SliceIndex(h.controllers, controller)
-    if idx == -1 {
-        logging.Error("Tried to remove controller %p, but controller was not found in slice: %v", controller, h.controllers)
-    }
+	if idx == -1 {
+		logging.Error("Tried to remove controller %p, but controller was not found in slice: %v", controller, h.controllers)
+	}
 	h.controllers = util.SliceDelete(h.controllers, idx, idx+1)
 }
 
 func (h *Hivemind) Update() {
 	for _, controller := range h.controllers {
 		// Calculate group steering behaviors for each controller
-		
+
 		separation := h.calculateSeparation(controller)
 		alignment := h.calculateAlignment(controller)
 		cohesion := h.calculateCohesion(controller)
-		
+
 		// Average the forces (in a real implementation, you might weight them differently)
 		averageForce := rl.Vector2{
 			X: (separation.X + alignment.X + cohesion.X) / 3,

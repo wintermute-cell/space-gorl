@@ -68,6 +68,14 @@ func DistributePointsOnCircleSection(startAngle, endAngle float64, pointsCount i
 	startRad := startAngle * math.Pi / 180.0
 	endRad := endAngle * math.Pi / 180.0
 
+    // If only one point is to be distributed, place it in the middle of the section
+    if pointsCount == 1 {
+        midAngle := (startRad + endRad) / 2
+        x := center.X + radius*float32(math.Cos(midAngle))
+        y := center.Y + radius*float32(math.Sin(midAngle))
+        return []rl.Vector2{{X: x, Y: y}}
+    }
+
 	// Calculate angle increment
 	angleIncrement := (endRad - startRad) / float64(pointsCount-1)
 

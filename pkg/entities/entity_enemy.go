@@ -3,7 +3,6 @@ package entities
 import (
 	"cowboy-gorl/pkg/audio"
 	"cowboy-gorl/pkg/entities/proto"
-	"cowboy-gorl/pkg/logging"
 	"cowboy-gorl/pkg/messaging"
 	"cowboy-gorl/pkg/physics"
 	"cowboy-gorl/pkg/render"
@@ -34,6 +33,10 @@ func NewEnemyEntity2D(position rl.Vector2, rotation float32, scale rl.Vector2) *
 	return new_ent
 }
 
+func (ent *EnemyEntity2D) IsAlive() bool {
+    return ent.isAlive
+}
+
 func (ent *EnemyEntity2D) SetData(data EnemyData) {
     ent.data = data
     ent.isAlive = true
@@ -55,7 +58,8 @@ func (ent *EnemyEntity2D) SetData(data EnemyData) {
         }
         ent.data.Hitpoints -= damage
     }
-    ent.collider = physics.NewCircleCollider(ent.GetPosition(), radius, physics.BodyTypeDynamic).SetFixedRotation(false).SetCallbacks(callbacks)
+    ent.collider = physics.NewCircleCollider(ent.GetPosition(), radius, physics.BodyTypeDynamic).SetFixedRotation(false).SetCallbacks(callbacks).SetOwner(ent)
+    ent.collider.GetB2Body().SetTransform(ent.collider.GetB2Body().GetPosition(), 1.5708)
     ent.collider.SetLinearDamping(data.LinearDamping)
     ent.collider.SetAngularDamping(data.AngularDamping)
 }
@@ -97,7 +101,6 @@ func (ent *EnemyEntity2D) Update() {
     if ent.data.Hitpoints <= 0 {
         physics.DestroyCollider(ent.collider)
         soundSide := util.Clamp((ent.GetPosition().X/render.Rs.RenderResolution.X), 0.05, 0.95)
-        logging.Debug("%v", soundSide)
         audio.PlaySoundExV2("audio/sounds/explosions/distant1.ogg", 1.0, 1.0, soundSide, 0.1)
         ent.isAlive = false
         messaging.SendMessage[messaging.GainScoreMessage]("", messaging.GainScoreMessage{Amount: ent.data.ScoreWorth, FromKill: true, KilledPosition: ent.GetPosition()})

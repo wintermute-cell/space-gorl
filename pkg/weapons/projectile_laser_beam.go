@@ -2,23 +2,27 @@ package weapons
 
 import (
 	"cowboy-gorl/pkg/physics"
+	"cowboy-gorl/pkg/util"
+	"sort"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 type LaserBeamProjectile struct {
     CurrentPosition rl.Vector2
-    Direction rl.Vector2
+    Target TurretTarget
     DistanceTraveled float32
     Progress        float32     // Progress towards the target (0 to 1)
 
     isActive bool
 
     Config ProjectileConfig
+
+    hitColliders []physics.RaycastHit
 }
 
-func (prj *LaserBeamProjectile) IsActiveIfContinuous() bool {
-    return prj.isActive
+func (prj *LaserBeamProjectile) IsContinuous() bool {
+    return true
 }
 
 func (prj *LaserBeamProjectile) Start() {
@@ -33,32 +37,33 @@ func (prj *LaserBeamProjectile) Stop() {
     // other stop logic...
 }
 
-func (prj *LaserBeamProjectile) Update(position, direction rl.Vector2) bool {
+func (prj *LaserBeamProjectile) Update() bool {
     if !prj.isActive {
         // begin phasing out logic / animation
         // return true at some point to remove projectile
         return true
     }
 
-    prj.CurrentPosition = position
-    prj.Direction = direction
 
-    hits := physics.Raycast(prj.CurrentPosition, prj.Direction, prj.Config.maxRange, physics.CollisionCategoryAll)
+    direction := util.Vector2NormalizeSafe(rl.Vector2Subtract(prj.Target.GetPosition(), prj.CurrentPosition)) 
 
-    for _, hit := range hits {
-        // If hit occurs, process the hit and break
-        // Process hit (e.g., apply damage)
-        // ...
-        _ = hit
-        break
+    prj.hitColliders = physics.Raycast(prj.CurrentPosition, direction, prj.Config.maxRange, physics.CollisionCategoryAll)
+    if len(prj.hitColliders) > 0 {
+        sort.Slice(prj.hitColliders, func(i, j int) bool {
+            idist := rl.Vector2Distance(prj.hitColliders[i].HitCollider.GetPosition(), prj.CurrentPosition)
+            jdist := rl.Vector2Distance(prj.hitColliders[j].HitCollider.GetPosition(), prj.CurrentPosition)
+            return idist < jdist
+        })
+        prj.hitColliders[0].HitCollider.GetCallbacks()[physics.CollisionCategoryBullet]("apply-damage", float32(180)*rl.GetFrameTime())
     }
 
     return false
 }
 
 func (prj *LaserBeamProjectile) Draw() {
-    endPoint := rl.Vector2Add(prj.CurrentPosition, rl.Vector2Scale(prj.Direction, prj.Config.maxRange))
-    rl.DrawLineV(prj.CurrentPosition, endPoint, rl.Blue)
+    if prj.isActive {
+        rl.DrawLineV(prj.CurrentPosition, prj.Target.GetPosition(), rl.Blue)
+    }
     //rl.DrawTexturePro(
     //    prj.Config.sprite,
     //    rl.NewRectangle(0, 0, float32(prj.Config.sprite.Width), float32(prj.Config.sprite.Height)),
@@ -67,21 +72,15 @@ func (prj *LaserBeamProjectile) Draw() {
     //    util.Vector2Angle(prj.Direction)+90, rl.Blue)
 }
 
-func NewLaserBeamProjectile(position, direction rl.Vector2, projectileConfig ProjectileConfig) *LaserBeamProjectile {
+func NewLaserBeamProjectile(position rl.Vector2, target TurretTarget, projectileConfig ProjectileConfig) Projectile {
     return &LaserBeamProjectile{
         CurrentPosition:  position,
-        Direction:        direction,
+        Target:        target,
         Config: ProjectileConfig{
             speed:            projectileConfig.speed,
             size:             projectileConfig.size,
             maxRange:         projectileConfig.maxRange,
             sprite:           projectileConfig.sprite,
-            isContinuous: true,
         },
-        DistanceTraveled: 0,
-        
     }
 }
-
-
-

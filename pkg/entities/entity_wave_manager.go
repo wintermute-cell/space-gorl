@@ -47,7 +47,7 @@ type WaveManagerEntity struct {
 func (ent *WaveManagerEntity) SpawnEnemy(enemyType EnemyType) {
     // Reuse or create a new enemy based on type
     var enemy *EnemyEntity2D
-    spawnPosition := rl.NewVector2(float32(rand.Int31n(320)), float32(rand.Int31n(20))*-1)
+    spawnPosition := rl.NewVector2(float32(rand.Int31n(320)), float32(rand.Int31n(20)))
     if len(ent.enemyPool[enemyType]) > 0 {
         enemy = ent.enemyPool[enemyType][len(ent.enemyPool[enemyType])-1]
         enemy.SetPosition(spawnPosition)
@@ -71,15 +71,15 @@ func NewWaveManagerEntity() *WaveManagerEntity {
         attackTarget: rl.NewVector2(160, 160),
         enemyPool: make(map[EnemyType][]*EnemyEntity2D),
         enemyData: make(map[EnemyType]EnemyData),
-        spawnTimer: util.NewTimer(1.2),
+        spawnTimer: util.NewTimer(0.01),
     }
 
     new_ent.enemyData[EnemyTypeBasic] = EnemyData{
         Type: EnemyTypeBasic,
         Sprite: rl.LoadTexture("sprites/ships/basic.png"),
         Size: rl.NewVector2(4, 8),
-        Hitpoints: 1,
-        ScoreWorth: 50,
+        Hitpoints: 3,
+        ScoreWorth: 5,
         Damage: 10,
         MovementPattern: func(collider *physics.Collider) {
             // Calculate separation, alignment, and cohesion forces
